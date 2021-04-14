@@ -1,0 +1,573 @@
+%
+%  lennartMath.sty
+%
+%  Initial Version 09 January 2019
+%  Latest Update 13 April 2020
+%  Version 1.0.2
+%
+%  Ceated on 09 January 2019 by
+%  Lennart Doppenschmitt     https://github.com/researchnix
+%
+%  MIT License
+%  Copyright (c) 2020
+%
+
+
+
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{math}[2019/01/09 Abbreviations for Mathematics]
+
+
+% Required Packages
+\RequirePackage{xparse}
+\RequirePackage{imakeidx}
+\RequirePackage{xstring}
+\RequirePackage{xcolor}
+\RequirePackage{amsmath}
+\RequirePackage{amsthm}
+\RequirePackage{amssymb}
+\RequirePackage{xfrac}
+\RequirePackage{pgf,tikz}
+\usetikzlibrary{arrows}
+
+% recommanded by jesse
+\RequirePackage{alphabeta}
+\RequirePackage{newunicodechar}
+
+% unicode stuff
+\newunicodechar{∇}{\ensuremath\nabla}
+\newunicodechar{∈}{\ensuremath\in}
+\newunicodechar{∞}{\ensuremath\infty}
+\newunicodechar{⊆}{\ensuremath\subseteq}
+\newunicodechar{∂}{\ensuremath\partial}
+
+
+% Theorem environments.
+\newcounter{everything}
+\numberwithin{everything}{section}
+\numberwithin{equation}{subsection}
+
+
+
+
+
+
+\theoremstyle{plain}
+\newtheorem{theorem}[everything]{Theorem}
+\newtheorem{proposition}[everything]{Proposition}
+\newtheorem{lemma}[everything]{Lemma}
+\newtheorem{corollary}[everything]{Corollary}
+\newtheorem{claim}[everything]{Claim}
+
+\theoremstyle{definition}
+\newtheorem{definition}[everything]{Definition}
+\newtheorem{example}[everything]{Example}
+\newtheorem{exercise}[everything]{Exercise}
+\newtheorem{discussion}[everything]{Discussion}
+\newtheorem{situation}[everything]{Situation}
+\newtheorem{idea}[everything]{Idea}
+\newtheorem{goal}[everything]{Goal}
+\newtheorem{calculation}[everything]{Calculation}
+\newtheorem{observation}[everything]{Observation}
+\newtheorem{intuition}[everything]{Intuition}
+
+\theoremstyle{remark}
+\newtheorem{remark}[everything]{Remark}
+\newtheorem{remarks}[everything]{Remarks}
+
+
+
+% making the proof square fancy
+\renewcommand{\qed}{\hfill$\blacksquare$}
+
+% giving proofs an indent
+% \let\newproof\proof
+% \renewenvironment{proof}{\begin{addmargin}[1em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
+
+% alternative math environments
+\newenvironment{ddef}[2][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{thm}[2][Theorem]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{lmm}[2][Lemma]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{exe}[2][Exercise]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{dsc}[2][Discussion]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{hnt}[2][Hint]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{rmk}[2][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{exa}[2][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+\newenvironment{ntn}[2][Intuition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+% \newenvironment{reflection}[2][Reflection]{\begin{trivlist}
+% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+% \newenvironment{proposition}[2][Proposition]{\begin{trivlist}
+% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+% \newenvironment{corollary}[2][Corollary]{\begin{trivlist}
+% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
+
+
+% Trying to find missing package for \fk 1
+\usepackage{verbatim}
+\RequirePackage{mathrsfs}            % Pretty calligraphy
+
+
+
+
+
+% testing area
+
+\DeclareDocumentCommand{\id}{m}{\text{id}_{#1}}
+\DeclareDocumentCommand{\id}{m}{\text{id}_{#1}}
+
+
+
+
+
+% general commands
+\ProvideDocumentCommand{\Operator}{m o o}{
+  \IfValueTF{#2}
+    {\IfValueTF{#3}
+      {#1_{#2}^{#3}}
+      {#1_{#2}}
+    }
+    {#1}
+}
+
+
+% text symbols
+% \texttt
+% \im for important stuff
+\DeclareDocumentCommand{\tx}{m}{\text{#1}}
+\DeclareDocumentCommand{\cl}{m}{\tx{Cl}(#1)}
+\DeclareDocumentCommand{\mat}{m m}{\tx{Mat}_{#1}(#2)}
+\DeclareDocumentCommand{\pol}{m m}{\mathcal{P}_{#1}(#2)}
+\DeclareDocumentCommand{\ttpl}{m m}{\begin{pmatrix} {#1} \\ {#2} \end{pmatrix}}
+\DeclareDocumentCommand{\tttpl}{m m m}{\begin{pmatrix} {#1} \\ {#2} \\ {#3} \end{pmatrix}}
+\DeclareDocumentCommand{\li}{}{L_{\infty}}
+\DeclareDocumentCommand{\ce}{m}{\text{CE}\pn{#1}}
+
+
+% functors
+\DeclareDocumentCommand{\C}{O{} }{C^{\infty}_{#1}}
+\DeclareDocumentCommand{\aut}{m}{\text{Aut}\pn{#1}}
+\DeclareDocumentCommand{\fms}{m O{\bullet} }{\Omega _{#1} ^{#2}}
+\DeclareDocumentCommand{\ch}{m}{\pb H _{#1}}
+\DeclareDocumentCommand{\ho}{m}{\pf H ^{#1}}
+\DeclareDocumentCommand{\h}{m}{\bd H (#1)}
+\DeclareDocumentCommand{\vf}{m}{\fk X_{#1}}
+\DeclareDocumentCommand{\sym}{O{} m}{\text{Sym}_{#1}\pn{#2}}
+\DeclareDocumentCommand{\gs}{m m}{H^0 _{#1} (#2)} % global sections
+
+
+% math fonts
+\ProvideDocumentCommand{\cal}{m}{\mathcal{#1}}
+\ProvideDocumentCommand{\bb}{m}{\mathbb{#1}}
+\ProvideDocumentCommand{\fk}{m}{\mathfrak{#1}}
+\ProvideDocumentCommand{\mit}{m}{\mathit{#1}}
+\ProvideDocumentCommand{\ft}{m}{\bf{#1}}
+
+
+% notebook specific
+\DeclareDocumentCommand{\tag}{m}{\vspace{10pt} \marginnote{#1}}
+\DeclareDocumentCommand{\q}{m}{\textcolor{rd}{#1}}
+\DeclareDocumentCommand{\highlight}{m}{\textcolor{olive}{#1}}
+
+
+% decorations
+\DeclareDocumentCommand{\bu}{m}{#1^{\bullet}}
+\DeclareDocumentCommand{\bd}{m}{#1_{\bullet}}
+\DeclareDocumentCommand{\du}{m}{#1^{\vee}}
+\DeclareDocumentCommand{\id}{m}{\text{id}_{#1}}
+\DeclareDocumentCommand{\st}{m}{#1^{\ast}}
+\DeclareDocumentCommand{\tp}{m}{#1^{T}}
+\DeclareDocumentCommand{\iv}{m}{#1^{-1}}
+\DeclareDocumentCommand{\inv}{m m}{\pn{#1} ^{#2}}
+\DeclareDocumentCommand{\gc}{m}{(-1) ^{#1}}
+
+
+% sums and products
+\ProvideDocumentCommand{\Dum}{O{} O{}}{\Operator\bigoplus[#1][#2]}
+\ProvideDocumentCommand{\Sum}{ O{} O{}}{\Operator\sum[#1][#2]}
+\DeclareDocumentCommand{\ten}{O{}}{\otimes_{#1}}
+\DeclareDocumentCommand{\ds}{}{\oplus}
+\DeclareDocumentCommand{\m}{}{\cdot}
+\DeclareDocumentCommand{\w}{}{\wedge}
+\DeclareDocumentCommand{\W}{m O{\bullet}}{\Lambda_{#1} ^{#2}}
+\DeclareDocumentCommand{\etc}{}{\dotsc}
+\DeclareDocumentCommand{\dts}{}{\dotsm}
+
+
+% homological algebra
+% change dga into cc for chain complex or cochain complex
+% maybe also ccx or cx
+\DeclareDocumentCommand{\dga}{m m}{\pn{\bu #1, #2}}
+
+
+% qft
+\DeclareDocumentCommand{\itr}{m}{#1_\text{int}}
+\DeclareDocumentCommand{\fr}{m}{#1_\text{free}}
+
+
+% Unsorted
+% ordered tuple \otpl or strictly ordered tuple \sot
+\DeclareDocumentCommand{\tpl}{m O{n}}{#1 _1, \etc, #1_{#2}}
+\ProvideDocumentCommand{\io}{m}{\iota_{#1}}
+\DeclareDocumentCommand{\lb}{}{\vspace{10px} \pr}
+\DeclareDocumentCommand{\pr}{}{\par \noindent}
+\DeclareDocumentCommand{\s}{}{~ \vert ~}
+\DeclareDocumentCommand{\tgt}{m}{T _{#1}}
+\DeclareDocumentCommand{\ctg}{m}{\st T _{#1}}
+\DeclareDocumentCommand{\cat}{m}{\texttt{#1}}
+\DeclareDocumentCommand{\p}{}{\times}
+\DeclareDocumentCommand{\stb}{m}{\tx{stab}_{#1}}
+\DeclareDocumentCommand{\orb}{m}{\cal O_{#1}}
+\DeclareDocumentCommand{\pb}{m}{{#1}^*}
+\DeclareDocumentCommand{\pf}{m}{{#1}_*}
+\DeclareDocumentCommand{\qu}{}{\diagup}
+\DeclareDocumentCommand{\P}{O{n}}{\bb{P}^{#1}} % projective space
+
+
+% relations
+\DeclareDocumentCommand{\se}{}{\simeq}
+\DeclareDocumentCommand{\un}{}{\subset}
+% \DeclareDocumentCommand{\su}{}{\subseteq}
+\DeclareDocumentCommand{\sg}{}{\leq}
+\DeclareDocumentCommand{\ni}{}{~\not\in~}
+\DeclareDocumentCommand{\not}{}{\slashed}
+\DeclareDocumentCommand{\act}{}{\circlearrowright}
+
+
+% basic math symbols
+% \infty
+\DeclareDocumentCommand{\c}{m}{\circ}
+\DeclareDocumentCommand{\abs}{m}{\vert #1 \vert}
+\DeclareDocumentCommand{\sr}{m}{\sqrt{#1}}
+\DeclareDocumentCommand{\nrm}{m}{\parallel #1 \parallel}
+\DeclareDocumentCommand{\tr}{m}{\text{tr} \pn{#1} }
+\DeclareDocumentCommand{\det}{m}{\text{det} \pn{#1}}
+\DeclareDocumentCommand{\rk}{m}{\text{rank} \pn{#1}}
+\DeclareDocumentCommand{\exp}{m}{\text{e}^{#1}}
+
+
+% maps
+% surjective map
+% combine \mt and \mto
+\DeclareDocumentCommand{\hom}{m m}{\text{Hom}(#1,#2)}
+\DeclareDocumentCommand{\map}{m O{} m}{#1 \xrightarrow{#2} #3}
+\DeclareDocumentCommand{\mt}{m m}{#1 \mapsto #2}
+\DeclareDocumentCommand{\lmap}{m O{} m}{#1 \xleftarrow{#2} #3}
+\DeclareDocumentCommand{\emap}{m O{} m O{} O{}}{
+    \begin{align*}
+        \map{& #1}[#2]{#3} \\
+        \mt{& #4}{#5}
+    \end{align*}
+}
+
+\DeclareDocumentCommand{\mono}{}{\hookrightarrow}
+\DeclareDocumentCommand{\imap}{m O{} m}{#2 : #1 \hookrightarrow #3}
+\DeclareDocumentCommand{\mto}{m O{} m}{#2 : #1 \mapsto #3}
+\DeclareDocumentCommand{\ra}{}{\rightarrow}
+\DeclareDocumentCommand{\la}{}{\leftarrow}
+\DeclareDocumentCommand{\lra}{}{\longrightarrow}
+\DeclareDocumentCommand{\rra}{}{\rightrightarrows}
+\DeclareDocumentCommand{\ses}{m O{} m O{} m}{\map{0}{#1}\map{}[#2]{#3}\map{}[#4]{#5}\map{}{0}}
+\DeclareDocumentCommand{\igpd}{m m}{#1 \rra #2}
+\DeclareDocumentCommand{\adj}{m m O{} O{}}{#3 : #1 \leftrightarrows #2 : #4}
+
+% \DeclareDocumentCommand{\adj}{m m O{} O{}}{
+% \begin{center}
+% \begin{tikzpicture}[scale=1.5]
+% \node (A) at (0,0) {$#1$};
+% \node (B) at (1,0) {$#2$};
+% \draw[->](.1,.1) -- node[above] {$#3$} (B.160);
+% \draw[->](B.200) -- node[below] {$#4$} (A.340);
+% \end{tikzpicture}
+% \end{center}
+% }
+
+
+
+
+
+% special letters and symbols
+\DeclareDocumentCommand{\g}{}{\fk g}
+\ProvideDocumentCommand{\T}{}{\cal T}
+\DeclareDocumentCommand{\O}{}{\cal O}
+\DeclareDocumentCommand{\ha}{}{\frac{1}{2}}
+\DeclareDocumentCommand{\sha}{}{\sfrac{1}{2}}
+\DeclareDocumentCommand{\rd}{}{\frac{1}{3}}
+\DeclareDocumentCommand{\srd}{}{\sfrac{1}{3}}
+\DeclareDocumentCommand{\qt}{}{\frac{1}{4}}
+\DeclareDocumentCommand{\sqt}{}{\sfrac{1}{4}}
+
+
+% special unit symbols
+\ProvideDocumentCommand{\U}{}{\fk 1}
+\DeclareMathOperator{\spn}{span}
+
+
+% standard number fields.
+\DeclareDocumentCommand{\N}{}{\bb{N}} % Natural
+\DeclareDocumentCommand{\Z}{}{\bb{Z}} % Integer
+\DeclareDocumentCommand{\Q}{}{\bb{Q}} % Rational
+\DeclareDocumentCommand{\R}{}{\bb{R}} % Real
+\DeclareDocumentCommand{\Rn}{}{\bb{R}^n} % Real
+\DeclareDocumentCommand{\Cx}{}{\bb{C}} % Complex
+\DeclareDocumentCommand{\F}{}{\bb{F}} % Finite
+\DeclareDocumentCommand{\K}{}{\bb{K}} % Generic
+\DeclareDocumentCommand{\HH}{}{\bb{H}} % Quaternions
+
+
+% math operators
+% combine \com and \gcom
+\DeclareDocumentCommand{\Int}{O{} O{}}{\int _{#1} ^{#2}}
+\DeclareDocumentCommand{\dbd}{O{} m}{\frac{d #1}{d #2}}
+\DeclareDocumentCommand{\lie}{O{}}{\cal L _{#1}}
+\DeclareDocumentCommand{\dl}{O{}}{\partial_{#1}}
+\ProvideDocumentCommand{\nb}{O{}}{\nabla_{$1}}
+\DeclareDocumentCommand{\D}{}{\Delta}
+\DeclareDocumentCommand{\com}{m m O{}}{#1 #3 #2 - #2 #3 #1}
+\DeclareDocumentCommand{\gcom}{m m O{} O{}}{#1 #3 #2 -(-1)^{#4} #2 #3 #1}
+
+
+
+%%% TIKZ DIAGRAMS %%%
+% product diagram
+% commutative parallelogram: cpl
+% grindelwald diagram (universality for product): cgw
+% commutative pentragram: cpg
+% cones ...
+% redo the \ses
+
+% groupoid
+\DeclareDocumentCommand{\gpd}{m O{} O{} m}{
+\begin{center}
+\begin{tikzpicture}[scale=0.7]
+\node[] (G) at (0,2) {$#1$};
+\node[] (X) at (0,0) {$#4$};
+\node[] (A) at (0,1.9) {};
+\node[] (B) at (0,0.1) {};
+\draw[-open triangle 45] (A.220) -- node[left] {$#2$} (B.140);
+\draw[-open triangle 45] (A.320) -- node[right] {$#3$} (B.40);
+\end{tikzpicture}
+\end{center}
+}
+
+% principal G-bundle
+\DeclareDocumentCommand{\gb}{O{G} m m}{    % principal G-bundle
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\node[] (G) at (0,1) {$#1$};
+\node[] (P) at (1,1) {$#2$};
+\node[] (B) at (1,0) {$#3$};
+\draw[-open triangle 45] (G) -- (P);
+\draw[-open triangle 45] (P) -- (B);
+\end{tikzpicture}
+\end{center}
+}
+
+% commutative (factoring) triangle
+\DeclareDocumentCommand{\ftr}{m O{} m O{} m O{}}{
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\node[] (a) at (0,2) {$#1$};
+\node[] (b) at (2.8,2) {$#3$};
+\node[] (c) at (1.4,0) {$#5$};
+\draw[-open triangle 45] (a) -- node[above] {$#2$} (b);
+\draw[-open triangle 45] (a) -- node[below left] {$#4$} (c);
+\draw[open triangle 45-] (b) -- node[below right] {$#6$} (c);
+\end{tikzpicture}
+\end{center}
+}
+
+% commutative (base) triangle
+\DeclareDocumentCommand{\btr}{m O{} m O{} m O{}}{
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\node[] (a) at (0,2) {$#1$};
+\node[] (b) at (2.8,2) {$#3$};
+\node[] (c) at (1.4,0) {$#5$};
+\draw[-open triangle 45] (a) -- node[above] {$#2$} (b);
+\draw[-open triangle 45] (a) -- node[below left] {$#4$} (c);
+\draw[-open triangle 45] (b) -- node[below right] {$#6$} (c);
+\end{tikzpicture}
+\end{center}
+}
+
+% commutative triangle
+\DeclareDocumentCommand{\ctr}{m O{} m O{} m O{}}{
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\node[] (a) at (0,2) {$#1$};
+\node[] (b) at (2,2) {$#3$};
+\node[] (c) at (2,0) {$#5$};
+\draw[-open triangle 45] (a) -- node[above] {$#2$} (b);
+\draw[-open triangle 45] (b) -- node[right] {$#4$} (c);
+\draw[-open triangle 45] (a) -- node[below left] {$#6$} (c);
+\end{tikzpicture}
+\end{center}
+}
+
+% commutative square
+\DeclareDocumentCommand{\csq}{m O{} O{} m O{} m O{} m}{
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\node[] (a) at (0,2) {$#1$};
+\node[] (b) at (2,2) {$#4$};
+\node[] (c) at (0,0) {$#6$};
+\node[] (d) at (2,0) {$#8$};
+\draw[-open triangle 45] (a) -- node[above] {$#2$} (b);
+\draw[-open triangle 45] (a) -- node[left] {$#3$} (c);
+\draw[-open triangle 45] (b) -- node[right] {$#5$} (d);
+\draw[-open triangle 45] (c) -- node[below] {$#7$} (d);
+\end{tikzpicture}
+\end{center}
+}
+
+
+% homotopy equivalence data
+\DeclareDocumentCommand{\hoe}{m O{} O{} m}{
+\begin{center}
+\begin{tikzpicture}[scale=1]
+\node[] (G) at (0,0) {$#1$};
+\node[] (X) at (2,0) {$#4$};
+\node[] (A) at (0.1,0) {};
+\node[] (B) at (1.9,0) {};
+\draw[-open triangle 45] (A.40) -- node[above] {$#2$} (B.140);
+\draw[open triangle 45-] (A.320) -- node[below] {$#3$} (B.220);
+\end{tikzpicture}
+\end{center}
+}
+
+
+
+
+%%% DELIMETER %%%
+
+
+% restriction
+\ProvideDocumentCommand{\at}{s tb tB tg t+ m}{
+  \IfBooleanTF {#1} % Starred version; no sizing
+    {\vert _{#6}}
+    {\IfBooleanTF {#2} % Make big
+      {\big \vert_{#6}}
+      {\IfBooleanTF {#3} % Make Big
+        {\Big \vert_{#6}}
+        {\IfBooleanTF {#4} % Make bigg
+          {\bigg \vert_{#6}}
+          {\IfBooleanTF {#5} % Make Bigg
+            {\Bigg \vert{#6}}
+            {\vert _{#6}} % Auto-size
+          }
+        }
+      }
+    }
+}
+
+
+% parentheses
+\ProvideDocumentCommand{\pn}{s tb tB tg tG m}{
+  \IfBooleanTF {#1} % Starred version; no sizing
+    {(#6)}
+    {\IfBooleanTF {#2} % Make big
+      {\bigl(#6\bigr)}
+      {\IfBooleanTF {#3} % Make Big
+        {\Bigl(#6\Bigr)}
+        {\IfBooleanTF {#4} % Make bigg
+          {\biggl(#6\biggr)}
+          {\IfBooleanTF {#5} % Make Bigg
+            {\Biggl(#6\Biggr)}
+            {\left(#6\right)} % Auto-size
+          }
+        }
+      }
+    }
+}
+
+
+% curly braces
+\ProvideDocumentCommand{\cb}{s tb tB tg tG m}{
+  \IfBooleanTF {#1} % Starred version; no sizing
+    {{#6}}
+    {\IfBooleanTF {#2} % Make big
+      {\bigl{#6\bigr}}
+      {\IfBooleanTF {#3} % Make Big
+        {\Bigl{#6\Bigr}}
+        {\IfBooleanTF {#4} % Make bigg
+          {\biggl{#6\biggr}}
+          {\IfBooleanTF {#5} % Make Bigg
+            {\Biggl{#6\Biggr}}
+            {\lbrace#6\rbrace}} % Auto-size
+          }
+        }
+      }
+    }
+
+
+% square brackets
+\DeclareDocumentCommand{\sb}{s tb tB tg tG m}{
+  \IfBooleanTF {#1} % Starred version; no sizing
+    {[#6]}
+    {\IfBooleanTF {#2} % Make big
+      {\bigl[#6\bigr]}
+      {\IfBooleanTF {#3} % Make Big
+        {\Bigl[#6\Bigr]}
+        {\IfBooleanTF {#4} % Make bigg
+          {\biggl[#6\biggr]}
+          {\IfBooleanTF {#5} % Make Bigg
+            {\Biggl[#6\Biggr]}
+            {\left[#6\right]} % Auto-size
+          }
+        }
+      }
+    }
+}
+
+
+%angle brackets
+\ProvideDocumentCommand{\an}{s tb tB tg tG m}{
+  \IfBooleanTF {#1} % Starred version; no sizing
+    {\langle #6 \rangle}
+    {\IfBooleanTF {#2} % Make big
+      {\bigl<#6\bigr>}
+      {\IfBooleanTF {#3} % Make Big
+        {\Bigl<#6\Bigr>}
+        {\IfBooleanTF {#4} % Make bigg
+          {\biggl<#6\biggr>}
+          {\IfBooleanTF {#5} % Make Bigg
+            {\Biggl<#6\Biggr>}
+            {\left<#6\right>} % Auto-size
+          }
+        }
+      }
+    }
+}
+
+
+
+
+
+%%% COLOURS %%%
+
+% custom colours
+\definecolor{gry}{HTML}{525252}
+\definecolor{rd}{HTML}{882B21}
+\definecolor{ble}{HTML}{394773}
+
+% colour commands
+\DeclareDocumentCommand{\ble}{m}{\textcolor{ble}{#1}}
+\DeclareDocumentCommand{\gry}{m}{\textcolor{gry}{#1}}
+\DeclareDocumentCommand{\red}{m}{\textcolor{rd}{#1}}
