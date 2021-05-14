@@ -1,0 +1,21 @@
+\documentclass[11pt]{article}
+\usepackage{silence}
+\WarningFilter{latex}{You have requested package}
+\input{ltx/pkg/preamble}
+
+
+\title{Article Template}
+\author{Lennart Döppenschmitt}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+
+\noindent
+Text ... \cite{l19}
+
+
+\bibliography{ltx/bib/b} % Use the bibliography.bib file for the bibliography
+\bibliographystyle{siam} % Use the plainnat style of referencing
+\end{document}

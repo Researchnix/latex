@@ -40,17 +40,13 @@
 \newunicodechar{∞}{\ensuremath\infty}
 \newunicodechar{⊆}{\ensuremath\subseteq}
 \newunicodechar{∂}{\ensuremath\partial}
+\newunicodechar{は}{\ensuremath\varpi}
 
 
 % Theorem environments.
 \newcounter{everything}
 \numberwithin{everything}{section}
 \numberwithin{equation}{subsection}
-
-
-
-
-
 
 \theoremstyle{plain}
 \newtheorem{theorem}[everything]{Theorem}
@@ -60,10 +56,10 @@
 \newtheorem{claim}[everything]{Claim}
 
 \theoremstyle{definition}
+\newtheorem{identity}[everything]{Identity}
 \newtheorem{definition}[everything]{Definition}
 \newtheorem{example}[everything]{Example}
 \newtheorem{exercise}[everything]{Exercise}
-\newtheorem{discussion}[everything]{Discussion}
 \newtheorem{situation}[everything]{Situation}
 \newtheorem{idea}[everything]{Idea}
 \newtheorem{goal}[everything]{Goal}
@@ -77,63 +73,14 @@
 
 
 
-% making the proof square fancy
-\renewcommand{\qed}{\hfill$\blacksquare$}
 
-% giving proofs an indent
-% \let\newproof\proof
-% \renewenvironment{proof}{\begin{addmargin}[1em]{0em}\begin{newproof}}{\end{newproof}\end{addmargin}\qed}
 
-% alternative math environments
-\newenvironment{ddef}[2][Definition]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
 
-\newenvironment{thm}[2][Theorem]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-
-\newenvironment{lmm}[2][Lemma]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-
-\newenvironment{exe}[2][Exercise]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-
-\newenvironment{dsc}[2][Discussion]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-
-\newenvironment{hnt}[2][Hint]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-
-\newenvironment{rmk}[2][Remark]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-
-\newenvironment{exa}[2][Example]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-
-\newenvironment{ntn}[2][Intuition]{\begin{trivlist}
-\item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-% \newenvironment{reflection}[2][Reflection]{\begin{trivlist}
-% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-% \newenvironment{proposition}[2][Proposition]{\begin{trivlist}
-% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
-% \newenvironment{corollary}[2][Corollary]{\begin{trivlist}
-% \item[\hskip \labelsep {\bfseries #1}\hskip \labelsep {\bfseries #2.}]}{\end{trivlist}}
 
 
 % Trying to find missing package for \fk 1
 \usepackage{verbatim}
 \RequirePackage{mathrsfs}            % Pretty calligraphy
-
-
-
-
-
-% testing area
-
-\DeclareDocumentCommand{\id}{m}{\text{id}_{#1}}
-\DeclareDocumentCommand{\id}{m}{\text{id}_{#1}}
-
-
-
 
 
 % general commands
@@ -153,9 +100,6 @@
 \DeclareDocumentCommand{\tx}{m}{\text{#1}}
 \DeclareDocumentCommand{\cl}{m}{\tx{Cl}(#1)}
 \DeclareDocumentCommand{\mat}{m m}{\tx{Mat}_{#1}(#2)}
-\DeclareDocumentCommand{\pol}{m m}{\mathcal{P}_{#1}(#2)}
-\DeclareDocumentCommand{\ttpl}{m m}{\begin{pmatrix} {#1} \\ {#2} \end{pmatrix}}
-\DeclareDocumentCommand{\tttpl}{m m m}{\begin{pmatrix} {#1} \\ {#2} \\ {#3} \end{pmatrix}}
 \DeclareDocumentCommand{\li}{}{L_{\infty}}
 \DeclareDocumentCommand{\ce}{m}{\text{CE}\pn{#1}}
 
@@ -177,11 +121,10 @@
 \ProvideDocumentCommand{\bb}{m}{\mathbb{#1}}
 \ProvideDocumentCommand{\fk}{m}{\mathfrak{#1}}
 \ProvideDocumentCommand{\mit}{m}{\mathit{#1}}
-\ProvideDocumentCommand{\ft}{m}{\bf{#1}}
 
 
 % notebook specific
-\DeclareDocumentCommand{\tag}{m}{\vspace{10pt} \marginnote{#1}}
+\DeclareDocumentCommand{\tag}{m}{\vspace{10pt} \marginnote{\texttt{#1}}}
 \DeclareDocumentCommand{\q}{m}{\textcolor{rd}{#1}}
 \DeclareDocumentCommand{\highlight}{m}{\textcolor{olive}{#1}}
 
@@ -190,7 +133,6 @@
 \DeclareDocumentCommand{\bu}{m}{#1^{\bullet}}
 \DeclareDocumentCommand{\bd}{m}{#1_{\bullet}}
 \DeclareDocumentCommand{\du}{m}{#1^{\vee}}
-\DeclareDocumentCommand{\id}{m}{\text{id}_{#1}}
 \DeclareDocumentCommand{\st}{m}{#1^{\ast}}
 \DeclareDocumentCommand{\tp}{m}{#1^{T}}
 \DeclareDocumentCommand{\iv}{m}{#1^{-1}}
@@ -335,7 +277,6 @@
 % combine \com and \gcom
 \DeclareDocumentCommand{\Int}{O{} O{}}{\int _{#1} ^{#2}}
 \DeclareDocumentCommand{\dbd}{O{} m}{\frac{d #1}{d #2}}
-\DeclareDocumentCommand{\lie}{O{}}{\cal L _{#1}}
 \DeclareDocumentCommand{\dl}{O{}}{\partial_{#1}}
 \ProvideDocumentCommand{\nb}{O{}}{\nabla_{$1}}
 \DeclareDocumentCommand{\D}{}{\Delta}
@@ -459,23 +400,23 @@
 
 
 % restriction
-\ProvideDocumentCommand{\at}{s tb tB tg t+ m}{
-  \IfBooleanTF {#1} % Starred version; no sizing
-    {\vert _{#6}}
-    {\IfBooleanTF {#2} % Make big
-      {\big \vert_{#6}}
-      {\IfBooleanTF {#3} % Make Big
-        {\Big \vert_{#6}}
-        {\IfBooleanTF {#4} % Make bigg
-          {\bigg \vert_{#6}}
-          {\IfBooleanTF {#5} % Make Bigg
-            {\Bigg \vert{#6}}
-            {\vert _{#6}} % Auto-size
-          }
-        }
-      }
-    }
-}
+% \ProvideDocumentCommand{\at}{s tb tB tg t+ m}{
+  % \IfBooleanTF {#1} % Starred version; no sizing
+    % {\vert _{#6}}
+    % {\IfBooleanTF {#2} % Make big
+      % {\big \vert_{#6}}
+      % {\IfBooleanTF {#3} % Make Big
+        % {\Big \vert_{#6}}
+        % {\IfBooleanTF {#4} % Make bigg
+          % {\bigg \vert_{#6}}
+          % {\IfBooleanTF {#5} % Make Bigg
+            % {\Bigg \vert{#6}}
+            % {\vert _{#6}} % Auto-size
+          % }
+        % }
+      % }
+    % }
+% }
 
 
 % parentheses
@@ -537,24 +478,24 @@
 }
 
 
-%angle brackets
-\ProvideDocumentCommand{\an}{s tb tB tg tG m}{
-  \IfBooleanTF {#1} % Starred version; no sizing
-    {\langle #6 \rangle}
-    {\IfBooleanTF {#2} % Make big
-      {\bigl<#6\bigr>}
-      {\IfBooleanTF {#3} % Make Big
-        {\Bigl<#6\Bigr>}
-        {\IfBooleanTF {#4} % Make bigg
-          {\biggl<#6\biggr>}
-          {\IfBooleanTF {#5} % Make Bigg
-            {\Biggl<#6\Biggr>}
-            {\left<#6\right>} % Auto-size
-          }
-        }
-      }
-    }
-}
+% %angle brackets
+% \ProvideDocumentCommand{\an}{s tb tB tg tG m}{
+  % \IfBooleanTF {#1} % Starred version; no sizing
+    % {\langle #6 \rangle}
+    % {\IfBooleanTF {#2} % Make big
+      % {\bigl<#6\bigr>}
+      % {\IfBooleanTF {#3} % Make Big
+        % {\Bigl<#6\Bigr>}
+        % {\IfBooleanTF {#4} % Make bigg
+          % {\biggl<#6\biggr>}
+          % {\IfBooleanTF {#5} % Make Bigg
+            % {\Biggl<#6\Biggr>}
+            % {\left<#6\right>} % Auto-size
+          % }
+        % }
+      % }
+    % }
+% }
 
 
 
