@@ -1,15 +1,15 @@
-%
-%  lennartMath.sty
+
+%  math.sty
 %
 %  Initial Version 09 January 2019
-%  Latest Update 13 April 2020
-%  Version 1.0.2
+%  Latest Update 23 May 2021
+%  Version 1.2.0
 %
 %  Ceated on 09 January 2019 by
 %  Lennart Doppenschmitt     https://github.com/researchnix
 %
 %  MIT License
-%  Copyright (c) 2020
+%  Copyright (c) 2021
 %
 
 
@@ -19,6 +19,8 @@
 
 
 % Required Packages
+\usepackage{mathtools}
+\usepackage{tensor}
 \RequirePackage{xparse}
 \RequirePackage{imakeidx}
 \RequirePackage{xstring}
@@ -34,16 +36,34 @@
 \RequirePackage{alphabeta}
 \RequirePackage{newunicodechar}
 
-% unicode stuff
+
+
+
+
+
+% ####### unicode stuff ####### 
+
 \newunicodechar{∇}{\ensuremath\nabla}
 \newunicodechar{∈}{\ensuremath\in}
 \newunicodechar{∞}{\ensuremath\infty}
 \newunicodechar{⊆}{\ensuremath\subseteq}
-\newunicodechar{∂}{\ensuremath\partial}
 \newunicodechar{は}{\ensuremath\varpi}
+\newunicodechar{◇}{\ensuremath\diamond}
+\newunicodechar{○}{\ensuremath\circ}
+%  such that
+\newunicodechar{│}{\ensuremath \quad\vert\quad }
+\newunicodechar{∧}{\ensuremath\wedge}
+\newunicodechar{∫}{\ensuremath\int}
+\newunicodechar{س}{\ensuremath\varpi}
+ % \newunicodechar{→}{\ensuremath\rightarrow}
+
+\newunicodechar{┴}{\ensuremath^\perp}
+\newunicodechar{●}{\ensuremath\bullet}
 
 
-% Theorem environments.
+
+
+% environments.
 \newcounter{everything}
 \numberwithin{everything}{section}
 \numberwithin{equation}{subsection}
@@ -79,8 +99,8 @@
 
 
 % Trying to find missing package for \fk 1
-\usepackage{verbatim}
-\RequirePackage{mathrsfs}            % Pretty calligraphy
+% \usepackage{verbatim}
+% \RequirePackage{mathrsfs}            % Pretty calligraphy
 
 
 % general commands
@@ -94,6 +114,102 @@
 }
 
 
+
+%  Lie algebra of
+\DeclareDocumentCommand{\lie}{m}{\tx{Lie}(#1)}
+
+
+%  identity hom
+\DeclareDocumentCommand{\id}{m}{\tx{id}_{#1}}
+%  space of diffeomorphisms
+\DeclareDocumentCommand{\diff}{m O{}}{\tx{Diff}_{#1}^{#2}}
+%  image of a hom
+\DeclareDocumentCommand{\im}{m}{\tx{im}(#1)}
+%  imaginary part
+\DeclareDocumentCommand{\Im}{m}{\tx{Im}(#1)}
+%  real part
+\DeclareDocumentCommand{\Re}{m}{\tx{Re}(#1)}
+
+%  chern connection
+\DeclareDocumentCommand{\chc}{}{∇^{\tx{ch}}}
+
+%  holomoprhic sheaf
+\DeclareDocumentCommand{\hsh}{O{}}{\mathcal{O}_{#1}}
+
+
+
+%----  differentials  ----%
+
+%  dlog
+\DeclareDocumentCommand{\dlog}{}{\tx{dlog}}
+%  dell
+\DeclareDocumentCommand{\dl}{O{}}{\partial_{#1}}
+%  dell bar
+\DeclareDocumentCommand{\dlb}{}{\bar \partial}
+%  unicode dell
+\newunicodechar{∂}{\ensuremath\partial}
+\newunicodechar{≠}{\ensuremath\neq}
+
+% \newunicodechar{±}{\ensuremath\pm}
+
+%  Lie derivative
+\DeclareDocumentCommand{\ld}{m}{\tx{L}_{#1}}
+
+
+
+
+
+
+
+
+
+
+%  topology
+
+
+%  S1
+\DeclareDocumentCommand{\sone}{}{S^1}
+
+
+
+
+
+
+%  principal module
+\DeclareDocumentCommand{\pmod}{m}{\mod{#1}^*}
+%  module
+\DeclareDocumentCommand{\mod}{m}{\texttt{mod}_{#1}}
+
+
+
+
+
+
+
+
+
+
+
+\DeclareDocumentCommand{\smp}{m}{\mathcal{S}_{#1}}
+\DeclareDocumentCommand{\lbs}{m}{\mathcal{L}_{#1}^{\tx{BS}}}
+\DeclareDocumentCommand{\lag}{m}{\mathcal{L}_{#1}}
+\DeclareDocumentCommand{\exb}{m}{\mathcal{L}_{#1}^{\tx{ex}}}
+\DeclareDocumentCommand{\lsb}{}{\mathcal{LS}}
+\DeclareDocumentCommand{\bis}{m}{\mathcal{B}_{#1}}
+\DeclareDocumentCommand{\poi}{m}{\tx{Pois}_{#1}}
+\DeclareDocumentCommand{\tpoi}{m}{\widetilde{\tx{Pois}}_{#1}}
+\DeclareDocumentCommand{\xht}{}{\widehat{\fk X}_θ}
+
+
+\DeclareDocumentCommand{\ev}{}{\text{ev}}
+
+
+%  differentials
+\DeclareDocumentCommand{\dc}{}{d^c}
+
+
+
+
 % text symbols
 % \texttt
 % \im for important stuff
@@ -105,7 +221,7 @@
 
 
 % functors
-\DeclareDocumentCommand{\C}{O{} }{C^{\infty}_{#1}}
+\DeclareDocumentCommand{\ci}{O{} }{C^{\infty}_{#1}}
 \DeclareDocumentCommand{\aut}{m}{\text{Aut}\pn{#1}}
 \DeclareDocumentCommand{\fms}{m O{\bullet} }{\Omega _{#1} ^{#2}}
 \DeclareDocumentCommand{\ch}{m}{\pb H _{#1}}
@@ -114,6 +230,7 @@
 \DeclareDocumentCommand{\vf}{m}{\fk X_{#1}}
 \DeclareDocumentCommand{\sym}{O{} m}{\text{Sym}_{#1}\pn{#2}}
 \DeclareDocumentCommand{\gs}{m m}{H^0 _{#1} (#2)} % global sections
+
 
 
 % math fonts
@@ -129,21 +246,32 @@
 \DeclareDocumentCommand{\highlight}{m}{\textcolor{olive}{#1}}
 
 
-% decorations
+%  decorations
+
+
+%  upper bullet
 \DeclareDocumentCommand{\bu}{m}{#1^{\bullet}}
+%  lower bullet
 \DeclareDocumentCommand{\bd}{m}{#1_{\bullet}}
+%  dual
 \DeclareDocumentCommand{\du}{m}{#1^{\vee}}
+%  star
 \DeclareDocumentCommand{\st}{m}{#1^{\ast}}
+%  transpose
 \DeclareDocumentCommand{\tp}{m}{#1^{T}}
+%  inverse
 \DeclareDocumentCommand{\iv}{m}{#1^{-1}}
-\DeclareDocumentCommand{\inv}{m m}{\pn{#1} ^{#2}}
-\DeclareDocumentCommand{\gc}{m}{(-1) ^{#1}}
+%  parentheses inverse
+\DeclareDocumentCommand{\pin}{m m}{\pn{#1} ^{#2}}
+%  graded sign
+\DeclareDocumentCommand{\gs}{m}{(-1) ^{#1}}
 
 
 % sums and products
 \ProvideDocumentCommand{\Dum}{O{} O{}}{\Operator\bigoplus[#1][#2]}
 \ProvideDocumentCommand{\Sum}{ O{} O{}}{\Operator\sum[#1][#2]}
-\DeclareDocumentCommand{\ten}{O{}}{\otimes_{#1}}
+% \DeclareDocumentCommand{\ten}{O{}}{\otimes_{#1}}
+% replaced by \tp
 \DeclareDocumentCommand{\ds}{}{\oplus}
 \DeclareDocumentCommand{\m}{}{\cdot}
 \DeclareDocumentCommand{\w}{}{\wedge}
@@ -182,19 +310,53 @@
 \DeclareDocumentCommand{\P}{O{n}}{\bb{P}^{#1}} % projective space
 
 
-% relations
+%  relations
+
+%  similar equal
 \DeclareDocumentCommand{\se}{}{\simeq}
+
+%  isomorphic
 \DeclareDocumentCommand{\un}{}{\subset}
-% \DeclareDocumentCommand{\su}{}{\subseteq}
+
+%  tilde
+
+
+%  sub group
 \DeclareDocumentCommand{\sg}{}{\leq}
 \DeclareDocumentCommand{\ni}{}{~\not\in~}
 \DeclareDocumentCommand{\not}{}{\slashed}
+
+%  acting on
 \DeclareDocumentCommand{\act}{}{\circlearrowright}
 
 
 % basic math symbols
 % \infty
-\DeclareDocumentCommand{\c}{m}{\circ}
+
+
+
+%  binary operations
+
+%  composition
+\DeclareDocumentCommand{\o}{}{~ \circ}
+
+
+%  fibre product
+% $ \tensor[_a^4_5]{X}{^b} $  & \\
+\DeclareDocumentCommand{\fp}{O{} O{}}{\tensor[_{#1}]{\times}{_{#2}}}
+%  tensor product
+\DeclareDocumentCommand{\tp}{O{} O{}}{\tensor[_{#1}]{\otimes}{_{#2}}}
+%  commutator
+\DeclareDocumentCommand{\com}{m m O{}}{#1 #3 #2 - #2 #3 #1}
+%  graded commutator
+\DeclareDocumentCommand{\gcom}{m m O{} O{}}{#1 #3 #2 -(-1)^{#4} #2 #3 #1}
+
+
+
+
+
+%  unary operations
+
 \DeclareDocumentCommand{\abs}{m}{\vert #1 \vert}
 \DeclareDocumentCommand{\sr}{m}{\sqrt{#1}}
 \DeclareDocumentCommand{\nrm}{m}{\parallel #1 \parallel}
@@ -204,10 +366,14 @@
 \DeclareDocumentCommand{\exp}{m}{\text{e}^{#1}}
 
 
-% maps
-% surjective map
-% combine \mt and \mto
-\DeclareDocumentCommand{\hom}{m m}{\text{Hom}(#1,#2)}
+
+%  categorical constructions
+
+%  hom bifunctor
+\DeclareDocumentCommand{\hom}{m}{\text{hom}(#1)}
+%  internal hom bifunctor
+\DeclareDocumentCommand{\Hom}{m m}{\text{Hom}(#1,#2)}
+
 \DeclareDocumentCommand{\map}{m O{} m}{#1 \xrightarrow{#2} #3}
 \DeclareDocumentCommand{\mt}{m m}{#1 \mapsto #2}
 \DeclareDocumentCommand{\lmap}{m O{} m}{#1 \xleftarrow{#2} #3}
@@ -222,6 +388,7 @@
 \DeclareDocumentCommand{\imap}{m O{} m}{#2 : #1 \hookrightarrow #3}
 \DeclareDocumentCommand{\mto}{m O{} m}{#2 : #1 \mapsto #3}
 \DeclareDocumentCommand{\ra}{}{\rightarrow}
+\DeclareDocumentCommand{\xra}{m}{\xrightarrow{#1}}
 \DeclareDocumentCommand{\la}{}{\leftarrow}
 \DeclareDocumentCommand{\lra}{}{\longrightarrow}
 \DeclareDocumentCommand{\rra}{}{\rightrightarrows}
@@ -267,7 +434,7 @@
 \DeclareDocumentCommand{\Q}{}{\bb{Q}} % Rational
 \DeclareDocumentCommand{\R}{}{\bb{R}} % Real
 \DeclareDocumentCommand{\Rn}{}{\bb{R}^n} % Real
-\DeclareDocumentCommand{\Cx}{}{\bb{C}} % Complex
+\DeclareDocumentCommand{\C}{}{\bb{C}} % Complex
 \DeclareDocumentCommand{\F}{}{\bb{F}} % Finite
 \DeclareDocumentCommand{\K}{}{\bb{K}} % Generic
 \DeclareDocumentCommand{\HH}{}{\bb{H}} % Quaternions
@@ -277,11 +444,8 @@
 % combine \com and \gcom
 \DeclareDocumentCommand{\Int}{O{} O{}}{\int _{#1} ^{#2}}
 \DeclareDocumentCommand{\dbd}{O{} m}{\frac{d #1}{d #2}}
-\DeclareDocumentCommand{\dl}{O{}}{\partial_{#1}}
 \ProvideDocumentCommand{\nb}{O{}}{\nabla_{$1}}
 \DeclareDocumentCommand{\D}{}{\Delta}
-\DeclareDocumentCommand{\com}{m m O{}}{#1 #3 #2 - #2 #3 #1}
-\DeclareDocumentCommand{\gcom}{m m O{} O{}}{#1 #3 #2 -(-1)^{#4} #2 #3 #1}
 
 
 
@@ -395,107 +559,24 @@
 
 
 
+% delimeter
 
-%%% DELIMETER %%%
+%  at
+\DeclareDocumentCommand{\at}{m}{\big \vert_{#1}}
+\DeclareDocumentCommand{\At}{m}{\bigg \vert_{#1}}
 
+%  angle brackets
+\DeclareDocumentCommand{\ab}{m}{\langle #1 \rangle}
 
-% restriction
-% \ProvideDocumentCommand{\at}{s tb tB tg t+ m}{
-  % \IfBooleanTF {#1} % Starred version; no sizing
-    % {\vert _{#6}}
-    % {\IfBooleanTF {#2} % Make big
-      % {\big \vert_{#6}}
-      % {\IfBooleanTF {#3} % Make Big
-        % {\Big \vert_{#6}}
-        % {\IfBooleanTF {#4} % Make bigg
-          % {\bigg \vert_{#6}}
-          % {\IfBooleanTF {#5} % Make Bigg
-            % {\Bigg \vert{#6}}
-            % {\vert _{#6}} % Auto-size
-          % }
-        % }
-      % }
-    % }
-% }
+%  parentheses
+\DeclareDocumentCommand{\pn}{m}{\left( #1 \right)}
 
+%   curly braces
+\DeclareDocumentCommand{\cb}{m}{\left\{ #1 \right\}}
 
-% parentheses
-\ProvideDocumentCommand{\pn}{s tb tB tg tG m}{
-  \IfBooleanTF {#1} % Starred version; no sizing
-    {(#6)}
-    {\IfBooleanTF {#2} % Make big
-      {\bigl(#6\bigr)}
-      {\IfBooleanTF {#3} % Make Big
-        {\Bigl(#6\Bigr)}
-        {\IfBooleanTF {#4} % Make bigg
-          {\biggl(#6\biggr)}
-          {\IfBooleanTF {#5} % Make Bigg
-            {\Biggl(#6\Biggr)}
-            {\left(#6\right)} % Auto-size
-          }
-        }
-      }
-    }
-}
+%  square brackets
+\DeclareDocumentCommand{\sb}{m}{\left[ #1 \right]}
 
-
-% curly braces
-\ProvideDocumentCommand{\cb}{s tb tB tg tG m}{
-  \IfBooleanTF {#1} % Starred version; no sizing
-    {{#6}}
-    {\IfBooleanTF {#2} % Make big
-      {\bigl{#6\bigr}}
-      {\IfBooleanTF {#3} % Make Big
-        {\Bigl{#6\Bigr}}
-        {\IfBooleanTF {#4} % Make bigg
-          {\biggl{#6\biggr}}
-          {\IfBooleanTF {#5} % Make Bigg
-            {\Biggl{#6\Biggr}}
-            {\lbrace#6\rbrace}} % Auto-size
-          }
-        }
-      }
-    }
-
-
-% square brackets
-\DeclareDocumentCommand{\sb}{s tb tB tg tG m}{
-  \IfBooleanTF {#1} % Starred version; no sizing
-    {[#6]}
-    {\IfBooleanTF {#2} % Make big
-      {\bigl[#6\bigr]}
-      {\IfBooleanTF {#3} % Make Big
-        {\Bigl[#6\Bigr]}
-        {\IfBooleanTF {#4} % Make bigg
-          {\biggl[#6\biggr]}
-          {\IfBooleanTF {#5} % Make Bigg
-            {\Biggl[#6\Biggr]}
-            {\left[#6\right]} % Auto-size
-          }
-        }
-      }
-    }
-}
-
-
-% %angle brackets
-% \ProvideDocumentCommand{\an}{s tb tB tg tG m}{
-  % \IfBooleanTF {#1} % Starred version; no sizing
-    % {\langle #6 \rangle}
-    % {\IfBooleanTF {#2} % Make big
-      % {\bigl<#6\bigr>}
-      % {\IfBooleanTF {#3} % Make Big
-        % {\Bigl<#6\Bigr>}
-        % {\IfBooleanTF {#4} % Make bigg
-          % {\biggl<#6\biggr>}
-          % {\IfBooleanTF {#5} % Make Bigg
-            % {\Biggl<#6\Biggr>}
-            % {\left<#6\right>} % Auto-size
-          % }
-        % }
-      % }
-    % }
-% }
 
 
 
