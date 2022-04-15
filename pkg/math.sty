@@ -30,11 +30,35 @@
 \RequirePackage{amssymb}
 \RequirePackage{xfrac}
 \RequirePackage{pgf,tikz}
-\usetikzlibrary{arrows}
+\usetikzlibrary{arrows, calc, 3d, positioning, shapes.geometric}
 
 % recommanded by jesse
 \RequirePackage{alphabeta}
 \RequirePackage{newunicodechar}
+
+
+
+
+
+
+
+
+% Thesis stuff
+% \DeclareDocumentCommand{\bbn}{}{\mathtt{BB}_{0}}
+\DeclareDocumentCommand{\bbn}{}{BΓ}
+\DeclareDocumentCommand{\lbs}{}{LΓ}
+% \DeclareDocumentCommand{\bis}{}{\mathtt{Bis}}
+\DeclareDocumentCommand{\bis}{}{Γ}
+\DeclareDocumentCommand{\sbis}{}{Γ_{s}}
+\DeclareDocumentCommand{\tbis}{}{Γ_{t}}
+\DeclareDocumentCommand{\bbh}{}{\widehat{\mathtt{BB}}_{0}}
+\DeclareDocumentCommand{\sub}{}{\subseteq}
+\DeclareDocumentCommand{\ann}{}{\text{Ann}}
+\DeclareDocumentCommand{\ev}{}{\tx{ev}}
+\DeclareDocumentCommand{\ufc}{}{\mathcal{A}_{\text{flat}}}
+\DeclareDocumentCommand{\bunc}{}{\underline{\mathbb{C}}}
+\DeclareDocumentCommand{\tbn}{}{\underline{\mathbb{C}}_{ε}}
+\DeclareDocumentCommand{\afce}{}{\mathcal{A}_{\text{flat}}(\underline{\C}_{ε})}
 
 
 
@@ -118,13 +142,14 @@
 
 
 %  Lie algebra of
-\DeclareDocumentCommand{\lie}{m}{\tx{Lie}(#1)}
+\DeclareDocumentCommand{\lie}{}{\tx{Lie}}
 
 
 %  identity hom
 \DeclareDocumentCommand{\id}{m}{\tx{id}_{#1}}
 %  space of diffeomorphisms
-\DeclareDocumentCommand{\diff}{m O{}}{\tx{Diff}_{#1}^{#2}}
+% \DeclareDocumentCommand{\diff}{m O{}}{\tx{Diff}_{#1}^{#2}}
+\DeclareDocumentCommand{\diff}{}{\tx{Diff}}
 %  image of a hom
 \DeclareDocumentCommand{\im}{m}{\tx{im}(#1)}
 %  imaginary part
@@ -193,11 +218,11 @@
 
 
 \DeclareDocumentCommand{\smp}{m}{\mathcal{S}_{#1}}
-\DeclareDocumentCommand{\lbs}{m}{\mathcal{L}_{#1}^{\tx{BS}}}
-\DeclareDocumentCommand{\lag}{m}{\mathcal{L}_{#1}}
+% \DeclareDocumentCommand{\lbs}{m}{\mathcal{L}_{#1}^{\tx{BS}}}
+\DeclareDocumentCommand{\lag}{}{\mathtt{Lag}}
 \DeclareDocumentCommand{\exb}{m}{\mathcal{L}_{#1}^{\tx{ex}}}
 \DeclareDocumentCommand{\lsb}{}{\mathcal{LS}}
-\DeclareDocumentCommand{\bis}{m}{\mathcal{B}_{#1}}
+\DeclareDocumentCommand{\bis}{}{Γ}
 \DeclareDocumentCommand{\poi}{m}{\tx{Pois}_{#1}}
 \DeclareDocumentCommand{\tpoi}{m}{\widetilde{\tx{Pois}}_{#1}}
 \DeclareDocumentCommand{\xht}{}{\widehat{\fk X}_θ}
