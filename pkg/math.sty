@@ -70,6 +70,12 @@
 \DeclareDocumentCommand{\lbr}{}{\mathcal{L}\text{Br}}
 \DeclareDocumentCommand{\ih}{}{\hat{\iota}}
 \DeclareDocumentCommand{\done}{}{ \begin{flushright} $\blacksquare$ \end{flushright}}
+\DeclareDocumentCommand{\cou}{m}{\llbracket #1 \rrbracket}
+\DeclareDocumentCommand{\gau}{}{\mathcal G}
+\DeclareDocumentCommand{\A}{}{\mathcal{A}}
+\DeclareDocumentCommand{\G}{}{\mathcal{G}}
+\DeclareDocumentCommand{\pg}{}{\mathcal{PG}}
+\DeclareDocumentCommand{\pgl}{}{\mathcal{PG}^{\ell}}
 
 
 
@@ -243,6 +249,7 @@
 \DeclareDocumentCommand{\smp}{m}{\mathcal{S}_{#1}}
 % \DeclareDocumentCommand{\lbs}{m}{\mathcal{L}_{#1}^{\tx{BS}}}
 \DeclareDocumentCommand{\lag}{}{\mathtt{Lag}}
+\DeclareDocumentCommand{\L}{}{\mathcal{L}}
 \DeclareDocumentCommand{\exb}{m}{\mathcal{L}_{#1}^{\tx{ex}}}
 \DeclareDocumentCommand{\lsb}{}{\mathcal{LS}}
 \DeclareDocumentCommand{\bis}{}{Γ}
@@ -272,7 +279,9 @@
 
 % functors
 \DeclareDocumentCommand{\ci}{O{} }{C^{\infty}_{#1}}
-\DeclareDocumentCommand{\aut}{m}{\text{Aut}\pn{#1}}
+\DeclareDocumentCommand{\aut}{m}{\text{aut}\pn{#1}}
+\DeclareDocumentCommand{\Aut}{}{\text{Aut}}
+\DeclareDocumentCommand{\Der}{}{\text{Der}}
 \DeclareDocumentCommand{\fms}{m O{\bullet} }{\Omega _{#1} ^{#2}}
 \DeclareDocumentCommand{\ch}{m}{\pb H _{#1}}
 \DeclareDocumentCommand{\ho}{m}{\pf H ^{#1}}
