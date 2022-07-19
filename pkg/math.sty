@@ -61,8 +61,10 @@
 \DeclareDocumentCommand{\bunc}{}{\underline{\mathbb{C}}}
 \DeclareDocumentCommand{\tbn}{}{\underline{\mathbb{C}}_{ε}}
 \DeclareDocumentCommand{\afce}{}{\mathcal{A}_{\text{flat}}(\underline{\C}_{ε})}
+\DeclareDocumentCommand{\uhg}{}{\mathcal{G}(\underline{\C}_{ε})}
 \DeclareDocumentCommand{\con}{}{\mathcal{A}}
 \DeclareDocumentCommand{\lhat}{}{\widehat{\ell}}
+\DeclareDocumentCommand{\Lhat}{}{\widehat{L}}
 \DeclareDocumentCommand{\xihat}{}{\widehat{ξ}}
 \DeclareDocumentCommand{\fb}{}{\overline{F}}
 \DeclareDocumentCommand{\xp}{}{X_{+}}
@@ -73,9 +75,17 @@
 \DeclareDocumentCommand{\cou}{m}{\llbracket #1 \rrbracket}
 \DeclareDocumentCommand{\gau}{}{\mathcal G}
 \DeclareDocumentCommand{\A}{}{\mathcal{A}}
+\DeclareDocumentCommand{\k}{}{\mathfrak{k}}
 \DeclareDocumentCommand{\G}{}{\mathcal{G}}
 \DeclareDocumentCommand{\pg}{}{\mathcal{PG}}
 \DeclareDocumentCommand{\pgl}{}{\mathcal{PG}^{\ell}}
+\DeclareDocumentCommand{\T}{}{\mathcal{T}}
+\DeclareDocumentCommand{\Isoc}{}{\mathfrak{Iso}_{\mathcal{C}}}
+\DeclareDocumentCommand{\isoc}{}{\mathfrak{iso}_{\mathcal{C}}}
+\DeclareDocumentCommand{\Autc}{}{\mathfrak{Aut}_{\mathcal{C}}}
+\DeclareDocumentCommand{\autc}{}{\mathfrak{aut}_{\mathcal{C}}}
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\DeclareDocumentCommand{\done}{}{\qed}
 
 
 
@@ -399,6 +409,7 @@
 
 %  acting on
 \DeclareDocumentCommand{\act}{}{\circlearrowright}
+\DeclareDocumentCommand{\lact}{}{\circlearrowleft}
 
 
 % basic math symbols
@@ -443,7 +454,7 @@
 %  hom bifunctor
 \DeclareDocumentCommand{\hom}{}{\text{hom}}
 %  internal hom bifunctor
-\DeclareDocumentCommand{\Hom}{m m}{\text{Hom}(#1,#2)}
+\DeclareDocumentCommand{\Hom}{}{\text{Hom}}
 
 \DeclareDocumentCommand{\map}{m O{} m}{#1 \xrightarrow{#2} #3}
 \DeclareDocumentCommand{\mt}{m m}{#1 \mapsto #2}
